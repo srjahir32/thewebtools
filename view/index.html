@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+
+<html ng-app="home">
+	<head>
+		<title>Phantom by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="css/main.css" />
+		<!-- loading baar -->
+		<!--<link rel="stylesheet" href="npm/angular-loading-bar/build/loading-bar.min.css" />-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		
+	</head>
+	<body ng-controller="homeClt">
+		<!-- Wrapper -->
+		
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner" ng-include src="'tpl/header.html'" ></div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="#/home">Home</a></li>
+							<li><a href="#/exceltovcf">Excel to VCF Converter</a></li>
+							<li><a href="#/vcfsplitter">VCF Splitter</a></li>
+							<li><a href="#/vcftoexcel">VCF to Excel Converter</a></li>
+							
+						</ul>
+					</nav>
+
+				<!-- Main -->
+				<div id="main">
+					<div ng-view class="inner" ></div>
+				</div>
+				<!-- Footer -->
+				<footer id="footer">
+					<div class="inner" ng-include src="'tpl/footer.html'" ></div>
+				</footer>
+			</div>
+
+		<!-- Scripts -->
+			<!-- angular and Controller -->
+				<script charset="utf-8" src="/js/angular.js"></script>
+				<script charset="utf-8" src="/js/controller/home.js"></script>
+				<script src="/npm/angular-route/angular-route.js"></script>
+			<!-- End angular and Controller -->
+			
+			<script src="/js/jquery.min.js"></script>
+			<script src="/js/skel.min.js"></script>
+			<script src="/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="/js/main.js"></script>
+			<!-- loading bar -->
+			<!--<script src="npm/angular-loading-bar/build/loading-bar.min.js"></script>-->
+		
+	   <!-- End Scripts -->
+	</body>
+</html>

@@ -1,0 +1,78 @@
+<html ng-app="excel">
+
+<head>
+    <title>exceltovcf</title>
+
+    <style>
+                input[type=text], select {
+                    width: 100%;
+                    padding: 12px 20px;
+                    margin: 8px 0;
+                    display: inline-block;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    box-sizing: border-box;
+                }
+
+                input[type=submit1] {
+                    width: 100%;
+                    background-color: #4CAF50;
+                    color: white;
+                    padding: 14px 20px;
+                    margin: 8px 0;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                }
+
+                input[type=submit1]:hover {
+                    background-color: #45a049;
+                }
+
+                div {
+                    border-radius: 5px;
+                    background-color: #f2f2f2;
+                    padding: 20px;
+                }   
+        </style>
+
+</head>
+
+<body ng-controller="exceltovcf">
+    <!--action="upload" enctype="multipart/form-data"  method="post"-->
+    <input type="button" value="Excel to Vcf" name="excel" ng-click="ConvertExcelToVcf()" />
+    <input type="button" value="Vcf to Excel" name="vcf" ng-click="ConvertVcfToExcel()" />
+    <input type="button" value="Vcf to Vcf" name="vcf" ng-click="ConvertVcfToVcf()" />
+    
+    <!-- Excel to Vcf -->
+    <form id="uploadForm" ng-show="excelForm">
+     Select Excel File:-   <input type="file" name="file" ngf-select  ng-model="Excelfile"  />Upload
+        <input type="submit" value="Upload" name="submit" ng-click="ExcelToVcf(Excelfile)">
+    </form>
+    <p>{{filename}}</p>
+
+    <!-- Vcf to Excel -->
+    <form id="uploadForm" ng-show="Vcfform">
+    Select Vcf file    <input type="file" name="file" ngf-select  ng-model="vcf"  />Upload
+        <input type="submit" value="Upload" name="submit" ng-click="VcfToExcel()">
+    </form>
+    
+    <!-- Vcf to Vcf -->
+    <form id="uploadForm" ng-show="Vcftocvf">
+    Select Vcf file(vcf to vcf)    <input type="file" name="file" ngf-select  ng-model="vcftovcf"  />Upload
+        <input type="submit" value="Upload" name="submit" ng-click="VcfToVcf(vcftovcf)">
+    </form>
+    
+    
+
+    <script charset="utf-8" src="/js/angular.js"></script>
+    <script charset="utf-8" src="/js/controller/exceltovcf.js"></script>
+
+
+    <!-- File Upload -->
+    <script src="/npm/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
+    <script src="/npm/ng-file-upload/dist/ng-file-upload.min.js"></script>
+    <!-- End File Upload -->
+</body>
+
+</html>
