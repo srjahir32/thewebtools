@@ -3,7 +3,7 @@ var xlstojson = require("xls-to-json-lc");
 var xlsxtojson = require("xlsx-to-json-lc");
 var vCard = require('vcards-js');
 
-exports.exceltocvf = function (req, res) 
+/*exports.exceltocvf = function (req, res) 
 {
      var storage = multer.diskStorage({ //multers disk storage settings
       destination: function (req, file, cb) {
@@ -108,7 +108,116 @@ exports.exceltocvf = function (req, res)
         })
        
    
+}*/
+
+exports.exceltocvf = function (req, res)
+ {
+   
+
+    var storage = multer.diskStorage({ 
+        fileFilter: function (req, file, callback) { 
+            if (['xls', 'xlsx'].indexOf(file.originalname.split('.')[file.originalname.split('.').length - 1]) === -1) {
+                return callback(new Error('Wrong extension type'));
+            }
+            callback(null, true);
+        }
+    });
+
+    var upload = multer({ 
+        storage: storage,
+
+    }).single('file');
+
+
+    var exceltojson;
+    upload(req, res, function (err) {
+        if (err)
+         {
+            res.json({ error_code: 1, err_desc: err });
+
+        }
+        if (!req.file)
+         {
+            res.json({ error_code: 1, err_desc: "No file passed" });
+
+        }
+        if (req.file.originalname.split('.')[req.file.originalname.split('.').length - 1] === 'xlsx') {
+            exceltojson = xlsxtojson;
+        }
+        else {
+            exceltojson = xlstojson;
+            }
+
+        //console.log("selected file path:-", req.file.path);
+
+
+        exceltojson(
+            {
+                input: req.file.path,
+                output: null,
+                return_type: 'File',
+
+            }, function (err, result) {
+                if (err) {
+
+                           res.json({ error_code: 1, err_desc: err, data: null });
+
+                         }
+                else 
+                        {
+                            vCard = vCard();
+                           
+                            for (var i = 0; i < result.length; i++)
+                             {
+
+                             // console.log('result', result);
+
+                                 var title = result[i].email;
+                                var firstname = result[i].name;
+                                var phone = result[i].phone;
+                                var lastname = result[i].lname;
+
+                                vCard.title = title;
+                                vCard.firstName = firstname;
+                                vCard.middleName = lastname;
+                                vCard.phone = phone;            
+                                
+                              
+                         
+
+                               /*     var firstname = result[i].fullname;
+                                   var bday = result[i].bday;
+                                   var addr = result[i].addr;
+                                   var Cellphone = result[i].Cellphone;
+                                   var Workphone = result[i].Workphone;
+                                   var email = result[i].email;
+                                   
+                                   vCard.firstName = firstname;
+                                   vCard.bday=bday;
+                                   vCard.addr=addr;
+                                   vCard.Cellphone=Cellphone;
+                                   vCard.Workphone=Workphone;
+                                   vCard.email=email;
+                              */
+                                   var saveto = ('uploads/Exceltovcf/' + firstname + '.vcf');
+                                   vCard.saveToFile(saveto);
+                                   console.log('file save at ', saveto);
+                                    res.json({ data: result,'path': saveto});
+                       
+                         }
+
+                  
+
+                }
+
+            });
+
+    })
+
+
 }
+
+
 
 
 exports.getExcelData = function (req, res) 

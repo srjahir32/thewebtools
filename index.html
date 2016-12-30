@@ -40,30 +40,39 @@
 
 <body ng-controller="exceltovcf">
     <!--action="upload" enctype="multipart/form-data"  method="post"-->
-    <input type="button" value="Excel to Vcf" name="excel" ng-click="ConvertExcelToVcf()" />
-    <input type="button" value="Vcf to Excel" name="vcf" ng-click="ConvertVcfToExcel()" />
-    <input type="button" value="Vcf to Vcf" name="vcf" ng-click="ConvertVcfToVcf()" />
-    
+    <input type="button" value="Excel to Vcf" name="excel"  ng-click="ConvertExcelToVcf()" />
+     
+     <input type="button" value="VCF Converter" name="dropdown" ng-click="dropdown()" />
+  
     <!-- Excel to Vcf -->
     <form id="uploadForm" ng-show="excelForm">
-     Select Excel File:-   <input type="file" name="file" ngf-select  ng-model="Excelfile"  />Upload
+     Select Excel File:-   <input type="file" name="file" ngf-select accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" ng-model="Excelfile"  />Upload
         <input type="submit" value="Upload" name="submit" ng-click="ExcelToVcf(Excelfile)">
     </form>
     <p>{{filename}}</p>
 
-    <!-- Vcf to Excel -->
-    <form id="uploadForm" ng-show="Vcfform">
-    Select Vcf file    <input type="file" name="file" ngf-select  ng-model="vcf"  />Upload
-        <input type="submit" value="Upload" name="submit" ng-click="VcfToExcel()">
-    </form>
+   
     
-    <!-- Vcf to Vcf -->
-    <form id="uploadForm" ng-show="Vcftocvf">
-    Select Vcf file(vcf to vcf)    <input type="file" name="file" ngf-select  ng-model="vcftovcf"  />Upload
-        <input type="submit" value="Upload" name="submit" ng-click="VcfToVcf(vcftovcf)">
-    </form>
+   
     
-    
+   
+   
+    <div  ng-show="dropdown1">
+
+        Select File   <input type="file" name="file" ngf-select accept="text/x-vcard" ng-model="file"  />
+       
+
+      <select ng-model="selectedName" >
+            <option value="xlsx">VCF TO XLSX</option> 
+            <option value="csv">VCF TO CSV</option>
+            <option value="vcf">VCF TO VCF</option>
+            
+      </select>
+     <input type="button" value="Convert into " name="submit" ng-click="Convert(file)">
+</div>
+ <div ng-show="download">
+  <a ng-href={{path}}>Download</a>
+  </div>
 
     <script charset="utf-8" src="/js/angular.js"></script>
     <script charset="utf-8" src="/js/controller/exceltovcf.js"></script>

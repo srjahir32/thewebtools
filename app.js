@@ -5,15 +5,17 @@
     var excel=require(__dirname +'/api/excel.js');
     var vcf=require(__dirname +'/api/VcftoExcel.js');
     var vcftovcf=require(__dirname +'/api/vcftovcf.js');
+    var vcftocsv=require(__dirname +'/api/VcftoCsv.js');
     var router = express.Router();
 
     app.use(bodyParser.json());  
  
-/*
-router.get('/',function(req,res)
+
+router.get('/test',function(req,res)
 {
     res.sendFile(__dirname + "/index.html");
-});*/
+});
+
 
 router.get('/',function(req,res)
 {
@@ -26,7 +28,7 @@ app.post('/getExcelData',excel.getExcelData);
 app.post('/vcftoEcel',vcf.vcftoexcel);
 
 app.post('/vcftovcf',vcftovcf.vcftovcf);
-
+app.post('/vcftocsv',vcftocsv.vcftoCsv);
 app.use('/', router);
 
 app.use("/npm", express.static(__dirname + '/node_modules'));
@@ -37,9 +39,10 @@ app.use("/css", express.static(__dirname + '/view/assets/css'));
 app.use("/fonts",express.static(__dirname+'/view/assets/fonts'));
 app.use("/assets", express.static(__dirname + '/view/assets'));
 app.use("/view", express.static(__dirname + '/view'));
+app.use("/uploads", express.static(__dirname + '/uploads'));
 app.use("/tpl",express.static(__dirname+'/view/assets/tpl'));
 
 
-    app.listen('8000', function(){
+    app.listen('3000', function(){
         console.log('running on 3000...');
     });

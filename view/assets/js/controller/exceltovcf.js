@@ -6,24 +6,14 @@ myapp.controller('exceltovcf',['Upload','$scope', '$window', '$http',
      $scope.ConvertExcelToVcf=function()
     {   
         $scope.excelForm=true;
-        $scope.Vcfform=false;
-        $scope.Vcftocvf=false;
+       $scope.dropdown1=false;
     }
-
-    $scope.ConvertVcfToExcel=function()
-    {
-        $scope.excelForm=false;
-        $scope.Vcfform=true;
-        $scope.Vcftocvf=false;
+ $scope.dropdown=function()
+    {   
+        $scope.dropdown1=true;
+         $scope.excelForm=false;
+      
     }
-
-    $scope.ConvertVcfToVcf=function()
-    {
-        $scope.excelForm=false;
-        $scope.Vcfform=false;
-        $scope.Vcftocvf=true;
-    }
-
      $scope.ExcelToVcf = function (file) 
      {
         var reader = new FileReader();
@@ -43,27 +33,88 @@ myapp.controller('exceltovcf',['Upload','$scope', '$window', '$http',
                     });
      }  
 
-   
-    $scope.VcfToExcel=function()
+
+    $scope.Convert=function(selected)
     {
-        console.log('convert vcf to excel');
+        var file=selected;
+        console.log('selected',$scope.selectedName);
+        if($scope.selectedName)
+        {
+
+             if($scope.selectedName=="csv")
+            {
+                    // csv
+
+                    Upload.upload({
+                    url: 'http://localhost:3000/vcftocsv',
+                    data: ({
+                        file: file
+                    })
+                }).then(
+                    function success(res) 
+                    {
+                        console.log('res', res);
+                        $scope.path=res.data.path;
+                        $scope.download = true;
+                    },
+                    function Error(err) 
+                    {
+                        console.log('err', err)
+                    });
+            }
+            if($scope.selectedName=="xlsx")
+            {
+                // excel
+
+                
+                    Upload.upload({
+                            url: 'http://localhost:3000/vcftoEcel',
+                            data: ({
+                                file: file
+                            })
+                        }).then(
+                            function success(res) 
+                            {
+                                console.log('res', res);
+                                $scope.path=res.data.path;
+                                $scope.download = true;
+                            },
+                            function Error(err) 
+                            {
+                                console.log('err', err)
+                            });
+                    
+            }
+
+            if($scope.selectedName=="vcf")
+            {
+                // vcf
+
+                
+                    Upload.upload({
+                        url: 'http://localhost:3000/vcftovcf',
+                        data: ({
+                            file: file
+                        })
+                    }).then(
+                        function success(res) 
+                        {
+                            console.log('res', res);
+                            $scope.path=res.data.path;
+                            $scope.download = true;
+                        },
+                        function Error(err) 
+                        {
+                            console.log('err', err)
+                        });
+                            
+                    }
+        }
+        else
+        {
+            console.log('please select file ');
+        }
+       
     }
 
-    $scope.VcfToVcf=function(file)
-    {
-        Upload.upload({
-                url: 'http://localhost:3000/vcftovcf',
-                data: ({
-                    file: file
-                })
-            }).then(
-                function success(res) 
-                {
-                    console.log('res', res);
-                },
-                function Error(err) 
-                {
-                    console.log('err', err)
-                });
-    }           
 }]);
