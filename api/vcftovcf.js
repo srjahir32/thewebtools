@@ -81,7 +81,7 @@ exports.vcftovcf = function (req, res)
                 console.log('Deleted files and folders:\n', paths.join('\n'));
             });
              res.json({ 'path': 'uploads/contacts.zip'});
-
+            
         }
     });
   });

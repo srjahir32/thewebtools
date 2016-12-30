@@ -1,3 +1,15 @@
 <header>
-    Excel/CSV to VCF Online Converter
+    Excel/CSV to VCF 
 </header>
+
+  <p>Enter Email=:-</p><div><input type="text" ng-model="email" placeholder="Enter Email"/></div>
+
+  <!-- Excel to Vcf -->
+    <form id="uploadForm">
+     Select Excel File:-   <input type="file" name="file" ngf-select accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" ng-model="Excelfile"  />Upload
+        <input type="submit" value="Upload" name="submit" ng-click="ExcelToVcf(Excelfile)">
+    </form>
+
+    <div ng-show="download">
+  <a ng-href="{{path}}">Download</a>
+  </div>

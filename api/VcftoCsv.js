@@ -78,7 +78,7 @@ exports.vcftoCsv = function (req, res) {
           {
             console.log('file saved successfully');
             res.json({ 'csv': csv ,'path':filepath});
-
+          
           }
         });
         }

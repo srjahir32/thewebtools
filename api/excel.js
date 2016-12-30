@@ -110,7 +110,7 @@ var vCard = require('vcards-js');
    
 }*/
 
-exports.exceltocvf = function (req, res)
+exports.exceltovcf = function (req, res)
  {
    
 
@@ -202,12 +202,11 @@ exports.exceltocvf = function (req, res)
                                    var saveto = ('uploads/Exceltovcf/' + firstname + '.vcf');
                                    vCard.saveToFile(saveto);
                                    console.log('file save at ', saveto);
-                                    res.json({ data: result,'path': saveto});
-                       
+                                   res.json({ data: result,'path': saveto});
+                                   return;
                          }
 
-                  
-
+            
                 }
 
             });

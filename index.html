@@ -46,15 +46,11 @@
   
     <!-- Excel to Vcf -->
     <form id="uploadForm" ng-show="excelForm">
-     Select Excel File:-   <input type="file" name="file" ngf-select accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" ng-model="Excelfile"  />Upload
+     Select Excel File:-   <input type="file" name="file" ngf-select accept=".csv" ng-model="Excelfile"  />Upload
         <input type="submit" value="Upload" name="submit" ng-click="ExcelToVcf(Excelfile)">
     </form>
     <p>{{filename}}</p>
 
-   
-    
-   
-    
    
    
     <div  ng-show="dropdown1">

@@ -1,1 +1,17 @@
 <p>vcftoexcel</p>
+ <div>
+
+        Select File   <input type="file" name="file" ngf-select accept="text/x-vcard" ng-model="file"  />
+       
+
+      <select ng-model="selectedName" >
+            <option value="xlsx">VCF TO XLSX</option> 
+            <option value="csv">VCF TO CSV</option>
+            <option value="vcf">VCF TO VCF</option>
+            
+      </select>
+     <input type="button" value="Convert into " name="submit" ng-click="Convert(file)">
+</div>
+ <div ng-show="download">
+  <a  ng-href={{path}}>Download</a>
+  </div>
